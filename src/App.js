@@ -1,4 +1,8 @@
 import SudokuSolverComponent from "./SudokuSolverComponent";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import * as React from "react";
+import Typography from "@mui/material/Typography";
 
 function App() {
   return (
@@ -6,7 +10,21 @@ function App() {
       <header className="App-header">
         <p>
           <h1>
-            <SudokuSolverComponent />
+            <React.Fragment>
+              <CssBaseline />
+              <Container maxWidth="sm" align="center">
+                <Typography
+                  variant="h4"
+                  align="center"
+                  color="inherit"
+                  spacing={4}
+                >
+                  Sudoku Solver
+                </Typography>
+
+                <SudokuSolverComponent />
+              </Container>
+            </React.Fragment>
           </h1>
         </p>
       </header>

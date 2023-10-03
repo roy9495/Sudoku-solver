@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SudokuGrid from "./SudokuGrid";
 import solveSudoku from "./SudokuSolver";
+import Button from "@mui/material/Button";
 
 function SudokuSolverComponent() {
   const initialGrid = [
@@ -35,9 +36,10 @@ function SudokuSolverComponent() {
 
   return (
     <div>
-      <h3>Sudoku Solver</h3>
       <SudokuGrid sudokuValues={sudokuValues} onChange={handleInputChange} />
-      <button onClick={handleSolveClick}>Solve Sudoku</button>
+      <Button variant="contained" color="warning" onClick={handleSolveClick}>
+        Solve
+      </Button>
     </div>
   );
 }
