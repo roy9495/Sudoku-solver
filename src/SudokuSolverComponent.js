@@ -16,6 +16,31 @@ function SudokuSolverComponent() {
     [0, 4, 0, 0, 5, 0, 0, 3, 6],
     [7, 0, 3, 0, 1, 8, 0, 0, 0],
   ];
+
+  const exampleGrid1 = [
+    [0, 0, 0, 0, 0, 6, 0, 5, 0],
+    [2, 0, 7, 0, 8, 0, 0, 0, 0],
+    [0, 0, 4, 0, 0, 0, 0, 0, 0],
+    [0, 6, 0, 0, 0, 5, 0, 0, 0],
+    [0, 0, 8, 0, 4, 0, 1, 0, 0],
+    [0, 0, 0, 3, 0, 0, 0, 9, 0],
+    [0, 0, 0, 0, 0, 0, 7, 0, 0],
+    [0, 0, 0, 0, 1, 0, 8, 0, 4],
+    [0, 3, 0, 2, 0, 0, 0, 0, 0],
+  ];
+
+  const exampleGrid2 = [
+    [5, 0, 0, 0, 3, 0, 9, 0, 0],
+    [0, 0, 1, 5, 0, 0, 0, 3, 0],
+    [9, 3, 0, 0, 0, 0, 0, 8, 0],
+    [4, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 8, 5, 9, 0, 0, 0],
+    [0, 0, 0, 0, 0, 6, 0, 0, 7],
+    [0, 6, 0, 0, 0, 0, 0, 5, 1],
+    [0, 9, 0, 0, 0, 5, 7, 0, 0],
+    [0, 0, 5, 0, 7, 0, 0, 0, 3],
+  ];
+ 
   const [sudokuValues, setSudokuValues] = useState(initialGrid);
 
   const handleSolveClick = () => {
@@ -30,6 +55,10 @@ function SudokuSolverComponent() {
 
   const handleResetClick = () => {
     setSudokuValues(initialGrid);
+  };
+
+  const handleExampleClick = () => {
+    setSudokuValues(exampleGrid1);
   };
 
   const handleInputChange = (row, col, value) => {
@@ -48,6 +77,13 @@ function SudokuSolverComponent() {
         </Button>
         <Button variant="contained" color="primary" onClick={handleResetClick}>
           Reset
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={handleExampleClick}
+        >
+          Example
         </Button>
       </Box>
     </div>
