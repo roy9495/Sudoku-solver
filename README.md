@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Sudoku Solver
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is live [here](https://sudoku-solver-umber.vercel.app/)
 
 ## Available Scripts
 
