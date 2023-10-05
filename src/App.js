@@ -3,6 +3,7 @@ import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
+import "./App.css";
 
 function App() {
   return (

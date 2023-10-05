@@ -3,6 +3,11 @@ import SudokuGrid from "./SudokuGrid";
 import solveSudoku from "./SudokuSolver";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
 
 function SudokuSolverComponent() {
   const initialGrid = [
@@ -40,25 +45,39 @@ function SudokuSolverComponent() {
     [0, 9, 0, 0, 0, 5, 7, 0, 0],
     [0, 0, 5, 0, 7, 0, 0, 0, 3],
   ];
- 
+
   const [sudokuValues, setSudokuValues] = useState(initialGrid);
+  const [exampleCount, setExampleCount] = useState(0);
+  const [isSolved, setIsSolved] = useState(false); // State to track if the Sudoku is solved
+  const [open, setOpen] = useState(false); // State to control the dialog open/close
 
   const handleSolveClick = () => {
     const solvedGrid = [...sudokuValues];
     if (solveSudoku(solvedGrid)) {
       setSudokuValues(solvedGrid);
+      setIsSolved(true);
+      setOpen(true); // Open the dialog when Sudoku is solved
     } else {
-      // Display a message that the puzzle is unsolvable
       alert("This Sudoku puzzle cannot be solved.");
     }
   };
 
+  const handleClose = () => {
+    setOpen(false); // Close the dialog
+  };
+
   const handleResetClick = () => {
     setSudokuValues(initialGrid);
+    setExampleCount(0);
   };
 
   const handleExampleClick = () => {
-    setSudokuValues(exampleGrid1);
+    // Determine which example grid to use based on exampleCount
+    const exampleGrid = exampleCount % 2 === 0 ? exampleGrid1 : exampleGrid2;
+    setSudokuValues(exampleGrid);
+
+    // Increment the example count
+    setExampleCount(exampleCount + 1);
   };
 
   const handleInputChange = (row, col, value) => {
@@ -86,6 +105,17 @@ function SudokuSolverComponent() {
           Example
         </Button>
       </Box>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Sudoku Solved!</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Yay! It is solved!</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
