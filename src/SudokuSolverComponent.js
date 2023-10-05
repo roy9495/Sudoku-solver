@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SudokuGrid from "./SudokuGrid";
 import solveSudoku from "./SudokuSolver";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 function SudokuSolverComponent() {
   const initialGrid = [
@@ -27,6 +28,10 @@ function SudokuSolverComponent() {
     }
   };
 
+  const handleResetClick = () => {
+    setSudokuValues(initialGrid);
+  };
+
   const handleInputChange = (row, col, value) => {
     // Update the Sudoku grid when the user inputs values
     const updatedGrid = [...sudokuValues];
@@ -37,9 +42,14 @@ function SudokuSolverComponent() {
   return (
     <div>
       <SudokuGrid sudokuValues={sudokuValues} onChange={handleInputChange} />
-      <Button variant="contained" color="warning" onClick={handleSolveClick}>
-        Solve
-      </Button>
+      <Box sx={{ "& button": { m: 1 } }}>
+        <Button variant="contained" color="warning" onClick={handleSolveClick}>
+          Solve
+        </Button>
+        <Button variant="contained" color="primary" onClick={handleResetClick}>
+          Reset
+        </Button>
+      </Box>
     </div>
   );
 }
