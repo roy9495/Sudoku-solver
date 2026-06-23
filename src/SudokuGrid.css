@@ -1,35 +1,189 @@
+/* SudokuGrid.css */
+
+.sudoku-grid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
 .sudoku-grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 1px;
-  background-color: #000;
-  border: 2px solid #000;
-  width: 300px;
-  height: 300px;
-}
-
-.sudoku-row {
-  display: grid;
-  flex-direction: row;
+  grid-template-rows: repeat(9, 1fr);
+  width: 450px;
+  height: 450px;
+  border: 3.5px solid var(--grid-outer-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  background-color: var(--board-bg);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .sudoku-cell {
   width: 100%;
   height: 100%;
-  font-size: 1.5rem;
+  min-width: 0 !important;  /* Critical fix for text inputs inside CSS grid */
+  min-height: 0 !important; /* Critical fix for text inputs inside CSS grid */
   text-align: center;
-  border: 1px solid #000;
-  background-color: #fff;
+  font-size: 1.45rem;
+  font-weight: 500;
+  border-top: none;
+  border-left: none;
+  border-right: 1px solid var(--grid-line-thin);
+  border-bottom: 1px solid var(--grid-line-thin);
+  background: var(--cell-bg);
+  color: var(--cell-text-user);
   outline: none;
+  border-radius: 0 !important; /* Explicitly reset rounded inputs */
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+  cursor: pointer;
+  caret-color: transparent; /* Hide text cursor for cleaner keyboard experience */
 }
 
-/* Add specific styling for empty cells */
-.sudoku-cell[value="0"] {
-  background-color: #f0f0f0;
+/* Thicker borders for 3x3 box outlines */
+.sudoku-cell.border-right-thick {
+  border-right: 3.5px solid var(--grid-line-thick) !important;
 }
 
-/* Add specific styling for pre-filled cells */
-.sudoku-cell[readonly] {
-  background-color: #5e7e35;
-  color: #000;
+.sudoku-cell.border-bottom-thick {
+  border-bottom: 3.5px solid var(--grid-line-thick) !important;
+}
+
+/* Clear outer edges to avoid doubling with the wrapper border */
+.sudoku-cell.col-8 {
+  border-right: none !important;
+}
+
+.sudoku-cell.row-8 {
+  border-bottom: none !important;
+}
+
+/* Alternating 3x3 box panel shading */
+.sudoku-cell.cell-block-alt {
+  background-color: var(--cell-bg-alt) !important;
+}
+
+/* Interactive Guides & Hovers */
+.sudoku-cell.highlight-guide {
+  background-color: rgba(99, 102, 241, 0.05);
+}
+
+.sudoku-cell.highlight-active-hover {
+  background-color: rgba(99, 102, 241, 0.15) !important;
+  box-shadow: inset 0 0 6px rgba(99, 102, 241, 0.3);
+}
+
+.sudoku-cell:focus {
+  background-color: rgba(168, 85, 247, 0.12) !important;
+  box-shadow: inset 0 0 8px rgba(168, 85, 247, 0.3);
+  font-weight: 600;
+}
+
+/* Cell States */
+.sudoku-cell.cell-given {
+  color: var(--cell-text-given) !important;
+  font-weight: 800;
+}
+
+body.dark-theme .sudoku-cell.cell-given {
+  text-shadow: 0 0 5px rgba(129, 140, 248, 0.45);
+}
+
+.sudoku-cell.cell-user {
+  color: var(--cell-text-user) !important;
+  font-weight: 600;
+}
+
+/* Conflict highlighting */
+.sudoku-cell.cell-conflict {
+  color: #f43f5e !important;
+  background-color: rgba(244, 63, 94, 0.18) !important;
+  text-shadow: 0 0 8px rgba(244, 63, 94, 0.4);
+  animation: pulse-conflict 1.5s infinite alternate ease-in-out;
+  border-color: rgba(244, 63, 94, 0.3) !important;
+}
+
+@keyframes pulse-conflict {
+  0% {
+    box-shadow: inset 0 0 2px rgba(244, 63, 94, 0.2);
+  }
+  100% {
+    box-shadow: inset 0 0 12px rgba(244, 63, 94, 0.6);
+  }
+}
+
+/* Solver Visualizer Animations */
+.sudoku-cell.cell-trying {
+  background-color: rgba(245, 158, 11, 0.28) !important; /* Glowing amber */
+  color: #fbbf24 !important;
+  font-weight: 700;
+  border: 1px solid rgba(245, 158, 11, 0.5) !important;
+  animation: cell-insert 0.15s ease-out;
+}
+
+.sudoku-cell.cell-backtrack {
+  background-color: rgba(244, 63, 94, 0.3) !important; /* Glowing crimson */
+  color: #fda4af !important;
+  font-weight: 700;
+  border: 1px solid rgba(244, 63, 94, 0.5) !important;
+  animation: cell-insert 0.15s ease-out;
+}
+
+.sudoku-cell.cell-success-step {
+  background-color: rgba(16, 185, 129, 0.35) !important; /* Glowing emerald */
+  color: #34d399 !important;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.5) !important;
+  animation: cell-success-pop 0.3s ease-out;
+}
+
+@keyframes cell-insert {
+  0% {
+    transform: scale(0.85);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes cell-success-pop {
+  0% {
+    transform: scale(0.9);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive constraints */
+@media (max-width: 500px) {
+  .sudoku-grid {
+    width: 342px;
+    height: 342px;
+  }
+  .sudoku-cell {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .sudoku-grid {
+    width: 288px;
+    height: 288px;
+  }
+  .sudoku-cell {
+    font-size: 1rem;
+  }
 }

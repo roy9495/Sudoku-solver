@@ -1,9 +1,2 @@
 /* App.css */
-body {
-    background-image: url("sudoku.jpg");
-    background-size: cover; /* Adjust this as needed */
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-  }
-  
+/* Visual styling is managed in index.css and Material UI theme variables */

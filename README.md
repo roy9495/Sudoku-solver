@@ -1,70 +1,45 @@
-# Sudoku Solver
+# Premium Sudoku Solver Visualizer
 
-This project is live [here](https://sudoku-solver-umber.vercel.app/)
+A premium, interactive web application that solves Sudoku puzzles step-by-step using a backtracking algorithm. Built with React and styled using CSS Custom Properties and Material UI.
 
-## Available Scripts
+Live Demo: [sudoku-solver-umber.vercel.app](https://sudoku-solver-umber.vercel.app/)
 
-In the project directory, you can run:
+## ✨ Key Features
+- **Backtracking Visualizer**: Real-time visualization of the backtracking search algorithm (depth-first search) with adjustable speed options (Turbo, Fast, Medium, Slow).
+- **Instant Solver (⚡)**: Solves the board instantly, showing overall execution time in milliseconds and the number of backtracks required.
+- **Custom Themeing**: Fully responsive light/dark themes:
+  - **White Theme (Light)**: Clean, solid black grid lines (`#000000`).
+  - **Black Theme (Dark)**: Glowing, solid white grid lines (`#ffffff`).
+- **Interactive Control Center**:
+  - **Game Presets**: Quickly load preset puzzles (Easy, Medium, Hard) from a solid, opaque selection menu.
+  - **Interactive Keypad**: Mouse-driven input helper for cell selection and entering digits.
+  - **Visualizer Guide**: Educative legend explaining cell animation states (Trying, Backtracking, Success Steps, Conflicts).
+- **Responsive Layout**: Designed to look stunning on both desktop and mobile viewports.
 
-### `npm start`
+## 🚀 Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+To run the application locally:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 1. Install Dependencies
+```bash
+npm install
+```
 
-### `npm test`
+### 2. Start the Development Server
+```bash
+npm start
+```
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 3. Build for Production
+```bash
+npm run build
+```
+Builds the app for production in the `build` folder, optimizing the bundle for maximum performance.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📂 Project Structure
+- [src/index.js](src/index.js): Entry point where global styles are imported.
+- [src/index.css](src/index.css): Contains global variable tokens for styling, colors, and light/dark theme overrides.
+- [src/SudokuSolverComponent.js](src/SudokuSolverComponent.js): Main dashboard coordinator component including layout grid, presets, speed slider, buttons, and visualizer logic.
+- [src/SudokuGrid.js](src/SudokuGrid.js): Grid board renderer handling focus highlights, conflict display, and key event navigation.
+- [src/SudokuSolver.js](src/SudokuSolver.js): Depth-first search (DFS) backtracking solver engine implemented using JavaScript generators.
