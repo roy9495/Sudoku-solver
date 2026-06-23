@@ -16,7 +16,7 @@ import SudokuSolverComponent from "./SudokuSolverComponent";
 import "./App.css";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   // Sync theme class to document.body for CSS variable overrides
   useEffect(() => {
